@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://raveena123:Student123@dsproject.vqje9.mongodb.net/admin_db?retryWrites=true&w=majority",
+  "jwtSecret": "sl_myJwtSecret"
+}
