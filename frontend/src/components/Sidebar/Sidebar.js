@@ -27,7 +27,7 @@ import {
 
 const structure = [
   { id: 0, label: "Dashboard", link: "/admin/dashboard", icon: <HomeIcon /> },
-  { id: 1, label: "User", link: "/admin/user", icon: <AccountIcon /> },
+  { id: 1, label: "Admins", link: "/admin/user", icon: <AccountIcon /> },
   // { id: 2, label: "User (context)", link: "/admin/usercontext", icon: <AccountIcon /> },
   // { id: 3, label: "Map (redux)", link: "/admin/map", icon: <PublicIcon /> },
   { id: 4, type: "divider" },

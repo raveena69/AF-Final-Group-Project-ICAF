@@ -93,7 +93,7 @@ const FormDialogEditUser = (props) => {
         TransitionComponent={Transition}
         aria-labelledby="form-dialog-title"
       >
-            <DialogTitle id="form-dialog-title" style={{padding: "30px 30px 0px 30px"}}>Edit User</DialogTitle>
+            <DialogTitle id="form-dialog-title" style={{padding: "30px 30px 0px 30px"}}>Edit Admin</DialogTitle>
 
             <DialogContent style={{padding: "30px 30px 10px 30px"}}>
                 

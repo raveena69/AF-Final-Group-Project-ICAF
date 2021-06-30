@@ -56,7 +56,7 @@ function AdminLayout(props) {
 
                 <Route path="/admin/dashboard" component={Dashboard} />
                 
-                <Route exact path="/admin/map" component={Map} />
+                {/* <Route exact path="/admin/map" component={Map} /> */}
                 <Route path="/admin/map/add" component={AddForm} />
                 <Route path="/admin/map/edit/:id" component={EditForm} />
 

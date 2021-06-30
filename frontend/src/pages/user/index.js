@@ -16,7 +16,7 @@ const styles = theme => ({
 const User = ({ classes, ...props }) => {
     return (
         <React.Fragment>
-            <PageTitle title="User" />
+            <PageTitle title="Admins" />
             <Grid container spacing={4}>
                 <Grid item xs={12} >
                     <Paper className={classes.paper}>

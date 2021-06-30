@@ -15,7 +15,7 @@ function SignUpMain() {
             <div id="signUpMain-background">
                 <div id="signUpMain-background1">
 
-                    <Link id="link" to="/adminDashboard">
+                    <Link id="link" to="/login">
                         <div id="customer-signUp">
                             <div className="admin-login">Admin Register</div>
                         </div>

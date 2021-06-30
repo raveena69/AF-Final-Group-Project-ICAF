@@ -48,7 +48,7 @@ export default function Header(props) {
       <Toolbar className={classes.toolbar}>
         
         <Typography variant="h6" weight="medium" className={classes.logotype}>
-          MERN Demo App
+        Welcome to International Conference on Application Frameworks [ICAF] - Admin Dashboard
         </Typography>
         <IconButton
           color="inherit"

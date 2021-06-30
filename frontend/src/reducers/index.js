@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import { map } from "./map";
-import { user } from "./user";
-
-export const reducers = combineReducers({
-    map, user
-})
+import authReducer from "./authReducers";
+import errorReducer from "./errorReducers";
+export default combineReducers({
+    auth: authReducer,
+    errors: errorReducer
+});

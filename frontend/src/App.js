@@ -1,103 +1,75 @@
-import React, { useContext } from "react";
-import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Dashboard from "./components/pages/Dashboard";
+import React, { Component } from 'react';
+import Login from "./components/auth/Login";
+import NotFound from "./components/layout/NotFound";
+import { Provider } from "react-redux";
+import PrivateRoute from "./components/private-route/PrivateRoute";
+import Register from "./components/auth/Register";
+import store from "./store";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
 import Home from './Home';
 import SignUp from "./SignUp";
 import SignUpMain from "./SignUpMain";
 import SignInMain from "./SignInMain";
 
-// components
-import AdminLayout from "./components/Layout/AdminLayout";
-// pages
-import Error from "./pages/error/Error";
-import Login from "./pages/login/Login";
-// context
-import { AuthContext } from "./context/AuthContext";
-// redux
-import { Provider } from "react-redux";
-import { store } from "./store/store";
-// toast
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.css';
+import '../node_modules/bootstrap/dist/js/bootstrap';
+import '../node_modules/font-awesome/css/font-awesome.css';
+import '../node_modules/jquery/dist/jquery.min';
+import '../node_modules/popper.js/dist/popper';
 
-export default function App() {
-  // global
-  let { isAuthenticated } = useContext(AuthContext)
+import User from "./components/pages/Users";
+import Editor from "./components/pages/Editors";
 
-  return (
-    <Provider store={store}>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={true}
-        rtl={false}
-        pauseOnFocusLoss={true}
-        draggable={false}
-        pauseOnHover={false}
-      />
-      
-      <HashRouter>
-          <Switch>
-              <Route exact path={"/"}>
-                    <Home/>
-                </Route>
-                <Route exact path={"/signUpMain"}>
-                    <SignUpMain/>
-                </Route>
-                <Route exact path={"/signInMain"}>
-                    <SignInMain/>
-                </Route>
-                <Route exact path={"/signUp"}>
-                    <SignUp/>
-                </Route>
-            <Route exact path="/adminDashboard" render={() => <Redirect to="/admin/dashboard" />} />
-            <Route exact path="/admin" render={() => <Redirect to="/admin/dashboard" />} />
-            <Route path="/login" component={Login} />
-            <ProtectedRoute path="/admin" component={AdminLayout} />
-            <Route component={Error} />
-          </Switch>
-      </HashRouter>
-    </Provider>
-  );
-
-  // #######################################################################
-
-  function ProtectedRoute ({ component: Component, ...rest }) {
-    return (
-      <Route
-        {...rest}
-        render={props =>
-          isAuthenticated() ? (
-            <Component {...props} /> 
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: {
-                  from: props.location,
-                },
-              }}
-            />
-          )
-        }
-      />
-    );
-  }
-
-  /* function PublicRoute({ component: Component, ...rest }) {
-    return (
-      <Route
-        {...rest}
-        render={props =>
-          isAuthenticated() ? (
-            <Redirect to={{ pathname: "/" }} />
-          ) : (
-            <Component {...props} /> 
-          )
-        }
-      />
-    );
-  } */
-
+if (localStorage.jwtToken) {
+    const token = localStorage.jwtToken;
+    setAuthToken(token);
+    const decoded = jwt_decode(token);
+    store.dispatch(setCurrentUser(decoded));
+    const currentTime = Date.now() / 1000;
+    if (decoded.exp < currentTime) {
+        store.dispatch(logoutUser());
+        window.location.href = "./login";
+    }
 }
+
+class App extends Component {
+    render () {
+        return (
+            <Provider store={store}>
+                <Router>
+                    <div className="App">
+                        <Switch>
+                            <Route exact path={"/"}>
+                                <Home/>
+                            </Route>
+                            <Route exact path={"/signUpMain"}>
+                                <SignUpMain/>
+                            </Route>
+                            <Route exact path={"/signInMain"}>
+                                <SignInMain/>
+                            </Route>
+                            <Route exact path={"/signUp"}>
+                                <SignUp/>
+                            </Route>
+                            <Route exact path="/register" component={Register} />
+                            <Route exact path="/login" component={Login} />
+                            <Switch>
+                                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                                <PrivateRoute exact path="/admins" component={User} />
+                                <PrivateRoute exact path="/editors" component={Editor} />
+                            </Switch>
+                            <Route exact path="*" component={NotFound} />
+                        </Switch>
+                    </div>
+                </Router>
+            </Provider>
+        );
+    }
+}
+
+export default App;

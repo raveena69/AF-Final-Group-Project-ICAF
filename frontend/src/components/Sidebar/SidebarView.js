@@ -33,7 +33,6 @@ const structure = [
     children: [
       { label: 'Icons', link: '/admin/ui/icons' },
       { label: 'Charts', link: '/admin/ui/charts' },
-      { label: 'Maps', link: '/admin/ui/maps' },
     ],
   },
   { id: 5, type: 'divider' },

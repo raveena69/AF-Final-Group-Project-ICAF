@@ -25,7 +25,7 @@ export default makeStyles(theme => ({
     justifyContent: "center",
   },
   linkIconActive: {
-    color: theme.palette.primary.main,
+    color: theme.palette.primary.main, 
   },
   linkText: {
     padding: 0,

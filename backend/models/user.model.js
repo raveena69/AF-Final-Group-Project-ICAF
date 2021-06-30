@@ -25,6 +25,6 @@ const UserSchema = new Schema({
 });
 
 UserSchema.plugin(mongoosePaginate);
-const User = model('user', UserSchema);
+const User = model('admin', UserSchema);
 
 export default User;
