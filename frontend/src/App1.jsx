@@ -3,6 +3,11 @@ import Home from './Home';
 import SignUp from "./SignUp";
 import SignUpMain from "./SignUpMain";
 import SignInMain from "./SignInMain";
+import EditorLogin from "./components/EditorLogin";
+import EditorRegister from "./components/EditorRegister";
+import editorProfile from "./components/editorProfile";
+import createConference from "./components/createConference";
+import conferenceDetails from "./components/conferenceDetails";
 import {BrowserRouter as Router,Route,Switch, HashRouter, Redirect} from "react-router-dom";
 
 // import PrivateRoute from "./components/routing/PrivateRoute";
@@ -87,6 +92,11 @@ export default class App extends React.Component{
                 <Route exact path={"/signUp"}>
                     <SignUp/>
                 </Route>
+                <Route path = "/editor-login" component={EditorLogin}/>
+                <Route path = "/editor-register" component={EditorRegister}/>
+               <Route path = "/profile" component={editorProfile}/>
+               <Route path = "/add-details" component={createConference}/>
+               <Route path = "/list" component={conferenceDetails}/>
                 <Route exact path="/adminDashboard" render={() => <Redirect to="/admin/dashboard" />} />
                 <Route exact path="/admin" render={() => <Redirect to="/admin/dashboard" />} />
                 <Route path="/login" component={Login} />
